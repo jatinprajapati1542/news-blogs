@@ -17,8 +17,7 @@ const __dirname = path.dirname(__filename);
 
 console.log(__filename)
 
-dotenv.config()
-
+dotenv.config();
 
 //middleware
 app.use(express.json({ limit: '10mb' }));
@@ -63,7 +62,6 @@ mongoose.connect(process.env.MONGO_URL)
     .catch(err => console.log(err))
 
 
-
 // routes
 app.use('/admin', (req, res, next) => {
     res.locals.layout = 'admin/layout';
@@ -74,8 +72,8 @@ app.use('/admin', adminRoute)
 
 app.use('/', frontendRoute)
 
-
+const PORT = process.env.PORT || 5000
 // app listen
-app.listen(5000, () => {
+app.listen(PORT, () => {
     console.log("server listen on port 5000")
 })
