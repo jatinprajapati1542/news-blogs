@@ -55,7 +55,7 @@ const adminLogin = async (req, res, next) => {
 
 const logout = (req, res) => {
     res.clearCookie('token')
-    res.redirect('/admin')
+    res.redirect('/')
 }
 
 const dashboard = async (req, res, next) => {
