@@ -90,7 +90,7 @@ const saveSetting = async (req, res, next) => {
     const website_logo = req.file?.filename
 
     try {
-        const setting = await settingModel.findOne();
+        let setting = await settingModel.findOne();
         if (!setting) {
             setting = new settingModel();
         }
@@ -107,10 +107,14 @@ const saveSetting = async (req, res, next) => {
         }
 
 
+
         await setting.save()
+
+        // cache.del('settingsCache')
 
         res.redirect('/admin/setting')
     } catch (error) {
+
         next(createError("Internal Server Error", 500))
     }
 }
@@ -150,7 +154,7 @@ const updateUserPage = async (req, res, next) => {
     try {
         const user = await userModal.findById(req.params.id)
         if (!user) {
-            return next(createError("User Not Found" , 404))
+            return next(createError("User Not Found", 404))
         }
         res.render('admin/users/update', { user, role: req.role, errors: 0 })
     } catch (error) {
@@ -163,7 +167,7 @@ const updateUser = async (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         return res.render('admin/users/update', {
-            id : id,
+            id: id,
             user: req.body,
             role: req.role,
             errors: errors.array()
@@ -196,7 +200,7 @@ const deleteUser = async (req, res, next) => {
             res.status(404).send('User not found')
         }
 
-        const article = await newsModel.find({ author: id })
+        const article = await newsModel.findOne({ author: id })
         if (article) {
             return res.status(400).json({ success: false, message: "User is assosiated with an article" })
         }
