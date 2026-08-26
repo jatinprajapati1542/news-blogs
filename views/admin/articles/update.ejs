@@ -27,7 +27,10 @@
                                     <!-- <option value="" selected> Select Category</option> -->
 
                                     <% categories.forEach(category=> { %>
-                                        <option value="<%= category._id %>" <%= category._id===article.category._id ? "selected" : "" %>>
+                                        <option value="<%= category._id %>" <%=article.category &&
+                                            category._id.toString()===article.category._id.toString() ? "selected" : ""
+                                            %>
+                                            >
                                             <%= category.name %>
                                         </option>
                                         <% }); %>
@@ -36,15 +39,15 @@
                             <div class="mb-3">
                                 <label for="article_image" class="form-label">Article image</label>
                                 <br>
-                                <img src="/uploads/<%= article.image %>" alt="" class="mb-3 w-25 border border-primary rounded"
-                                    border-color-primery />
+                                <img src="/uploads/<%= article.image %>" alt=""
+                                    class="mb-3 w-25 border border-primary rounded" border-color-primery />
                                 <input type="file" name="image" id="article_image" class="form-control">
                             </div>
                             <input type="submit" name="submit" class="btn btn-primary" value="Update" />
                         </form>
                         <!--/Form -->
                         <!-- error message -->
-                            <%- include('../partials/error') %>
+                        <%- include('../partials/error') %>
                     </div>
                 </div>
             </div>

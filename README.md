@@ -5,7 +5,7 @@ The application allows users to browse news articles, while administrators can m
 
 ## 🚀 Live Demo
 
-**Live Website:** [Add your Render URL here]
+**Live Website:** https://news-blogs-gyz3.onrender.com
 
 ## 📌 Features
 
@@ -19,7 +19,7 @@ The application allows users to browse news articles, while administrators can m
 * 📝 Rich text editor for news content
 * 🗄️ MongoDB database
 * 🔒 Password hashing using bcrypt
-* 🔑 Session-based authentication
+* 🔑 JWT authentication
 
 ## 🛠️ Technologies Used
 
@@ -48,47 +48,18 @@ The application allows users to browse news articles, while administrators can m
 * MongoDB Atlas
 * GitHub
 
-## 📁 Project Structure
-
-```text
-NEWS-CMS/
-│
-├── controllers/
-├── middleware/
-├── models/
-├── routes/
-├── views/
-│   ├── admin/
-│   ├── auth/
-│   ├── layouts/
-│   └── ...
-│
-├── public/
-│   ├── css/
-│   ├── js/
-│   └── ...
-│
-├── uploads/
-├── config/
-├── app.js
-├── package.json
-├── package-lock.json
-├── .gitignore
-└── README.md
-```
-
 ## ⚙️ Installation
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/NEWS-CMS.git
+git clone https://github.com/jatinprajapati1542/news-blogs.git
 ```
 
 ### 2. Go to the project directory
 
 ```bash
-cd NEWS-CMS
+cd news-blogs
 ```
 
 ### 3. Install dependencies
@@ -104,10 +75,9 @@ Create a `.env` file in the root directory:
 ```env
 PORT=5000
 MONGO_URL=your_mongodb_connection_string
-SESSION_SECRET=your_session_secret
+JWT_SECRET=your_JWT_secret
 ```
 
-> Do not upload your `.env` file to GitHub.
 
 ### 5. Start the development server
 
@@ -135,11 +105,11 @@ MONGO_URL=mongodb+srv://username:password@cluster.mongodb.net/news-cms
 
 ## 🔐 Environment Variables
 
-| Variable         | Description                        |
-| ---------------- | ---------------------------------- |
-| `PORT`           | Server port                        |
-| `MONGO_URL`      | MongoDB connection string          |
-| `SESSION_SECRET` | Secret used for session management |
+| Variable         | Description                           |
+| ---------------- | ------------------------------------- |
+| `PORT`           | Server port                           |
+| `MONGO_URL`      | MongoDB connection string             |
+| `JWT_SECRET`     |Secret key used for signing JWT tokens |
 
 ## 🌐 Deployment
 
@@ -161,26 +131,12 @@ npm start
 
 Add the required environment variables in the Render dashboard.
 
-## 📸 Screenshots
-
-### Home Page
-
-*Add screenshot here*
-
-### Admin Dashboard
-
-*Add screenshot here*
-
-### News Management
-
-*Add screenshot here*
-
 ## 🔒 Security
 
 Sensitive information such as:
 
 * MongoDB credentials
-* Session secrets
+* JWT secrets
 * API keys
 * Environment variables
 
@@ -191,15 +147,14 @@ Make sure `.env` is included in `.gitignore`:
 ```gitignore
 node_modules/
 .env
-uploads/*
 ```
 
 ## 👨‍💻 Author
 
 **Jatin Prajapati**
 
-GitHub: [Your GitHub Profile](https://github.com/YOUR_USERNAME)
+GitHub: https://github.com/jatinprajapati1542
 
 ## 📄 License
 
-This project is created for learning and development purposes.
+This project is created for learning and portfolio purposes.
