@@ -83,7 +83,7 @@ const deleteCategory = async (req, res, next) => {
             return next(createError("Category Not Found", 404))
         }
 
-        const article = await newsModel.find({ category: id })
+        const article = await newsModel.findOne({ category: id })
         if (article) {
             return res.status(400).json({ success: false, message: 'Category is assosiated with an article ' })
         }
