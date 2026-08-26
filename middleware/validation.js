@@ -60,17 +60,17 @@ const categoryValidation = [
     body('name')
         .trim()
         .notEmpty().withMessage('Category name is required')
-        .isLength({ min: 3, max: 12 }).withMessage('category name must be 5 to 12 charecter long'),
+        .isLength({ min: 3, max: 15 }).withMessage('category name must be 5 to 12 charecter long'),
 
     body('description')
-        .isLength({ max: 100 }).withMessage('description must be at most 100 charecter long')
+        .isLength({ max: 150 }).withMessage('description must be at most 100 charecter long')
 ]
 
 const articleValidation = [
     body('title')
         .trim()
         .notEmpty().withMessage('Title is required')
-        .isLength({ min: 7, max: 50 }).withMessage('category name must be 7 to 50 charecter long'),
+        .isLength({ min: 7, max: 100 }).withMessage('category name must be 7 to 50 charecter long'),
 
     body('content')
         .trim()
