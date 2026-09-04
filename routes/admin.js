@@ -5,7 +5,8 @@ import categoryController from "../controllers/categoryController.js"
 import userController from "../controllers/userController.js"
 import isLogin from "../middleware/isLogin.js"
 import isAdmin from "../middleware/isAdmin.js"
-import upload from "../middleware/multer.js"
+// import upload from "../middleware/multer.js"
+import upload from "../config/multer.js"
 
 import isValid from "../middleware/validation.js"
 const router = express.Router();

@@ -4,12 +4,13 @@ import newsModel from "../models/News.js"
 import categoryModel from "../models/Category.js"
 import createError from "../utils/createError.js"
 import fs from "fs"
-import path from "path"
-import { fileURLToPath } from "url";
-import { validationResult } from "express-validator"
+import cloudinary from "../config/cloudinary.js"
+// import path from "path"
+// import { fileURLToPath } from "url";
+// import { validationResult } from "express-validator"
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 const allArticle = async (req, res, next) => {
     try {
@@ -57,7 +58,7 @@ const addArticle = async (req, res, next) => {
             content,
             category,
             author: req.id,
-            image: req.file.filename
+            image: req.file.path
         });
         await article.save()
         res.redirect('/admin/article')
@@ -124,19 +125,8 @@ const updateArticle = async (req, res, next) => {
         article.content = content || article.content;
         article.category = category || article.category;
         if (req.file) {
-            if (article.image) {
-                const imagePath = path.join(
-                    __dirname,
-                    '../public/uploads',
-                    article.image
-                );
-
-                if (fs.existsSync(imagePath)) {
-                    fs.unlinkSync(imagePath);
-                }
-            }
-
-            article.image = req.file.filename;
+            await cloudinary.uploader.destroy(article.image)
+            article.image = req.file.path;
         }
         await article.save()
         res.redirect('/admin/article')
@@ -161,8 +151,9 @@ const deleteArticle = async (req, res, next) => {
             }
         }
 
-        const filePath = path.join(__dirname, '../public/uploads', article.image)
-        fs.unlinkSync(filePath)
+        if(article.image){
+            await cloudinary.uploader.destroy(article.image)
+        }
 
         await article.deleteOne()
         res.status(200).json({ success: true })

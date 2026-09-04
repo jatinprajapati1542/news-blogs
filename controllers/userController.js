@@ -7,12 +7,7 @@ import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import { validationResult } from "express-validator"
-import fs from "fs"
-import path from "path"
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import cloudinary from "../config/cloudinary.js"
 
 dotenv.config()
 
@@ -87,7 +82,7 @@ const setting = async (req, res, next) => {
 
 const saveSetting = async (req, res, next) => {
     const { website_title, footer_description } = req.body;
-    const website_logo = req.file?.filename
+    const website_logo = req.file?.path
 
     try {
         let setting = await settingModel.findOne();
@@ -100,8 +95,7 @@ const saveSetting = async (req, res, next) => {
 
         if (website_logo) {
             if (setting.website_logo) {
-                const logoPath = `./public/uploads/${setting.website_logo}`
-                fs.unlinkSync(logoPath)
+                await cloudinary.uploader.destroy(setting.website_logo)
             }
             setting.website_logo = website_logo
         }
