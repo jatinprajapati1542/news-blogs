@@ -17,7 +17,7 @@
         <h4>Recent Posts</h4>
         <% latestNews.forEach(article=> {%>
             <div class="recent-post">
-                <a class="post-img" href="">
+                <a class="post-img" href="/single/<%= article._id %>">
                     <img src="<%= article.image %>" alt="" />
                 </a>
                 <div class="post-content">
