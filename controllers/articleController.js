@@ -7,7 +7,7 @@ import fs from "fs"
 import cloudinary from "../config/cloudinary.js"
 // import path from "path"
 // import { fileURLToPath } from "url";
-// import { validationResult } from "express-validator"
+import { validationResult } from "express-validator"
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
